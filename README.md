@@ -1,4 +1,5 @@
-![Captura de pantalla (480)](https://user-images.githubusercontent.com/76067475/140103860-6e7963df-1e73-419a-ad3b-f73c2ee2cf98.png
+![Captura de pantalla (480)](https://user-images.githubusercontent.com/76067475/140103860-6e7963df-1e73-419a-ad3b-f73c2ee2cf98.png)
+
 ![Captura de pantalla (481)](https://user-images.githubusercontent.com/76067475/140103876-03f7c216-f825-4bd2-a069-b26a95f48416.png)
 ![Captura de pantalla (482)](https://user-images.githubusercontent.com/76067475/140103898-2a8b2bf5-8dfd-47b7-a600-40972dab99dd.png)
 )
