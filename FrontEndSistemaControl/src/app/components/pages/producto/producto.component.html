@@ -1,0 +1,128 @@
+<div class="container-scroller">
+  <app-navbar></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <!-- CUERPO -->
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Listado Productos</h4>
+
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForm" (click) = "CrearFormulario()">
+                Nuevo
+              </button>
+
+              <div class="table-responsive mt-3">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Imagen</th>
+                      <th>Proveedor</th>
+                      <th>Codigo</th>
+                      <th>Descripción</th>
+                      <th>Cantidad</th>
+                      <th>Precio</th>
+                      <th>Fecha Creac.</th>
+                      <th>Fecha Act.</th>
+                      <th colspan="2">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of productos">
+                      <td>
+                        <img [src]="MostrarImagen(item.imagen)"
+                        onerror="this.src='assets/images/sinImagen.jpg'"
+                         width="100" height="100">
+                      </td>
+                      <td>{{item.proveedor != null ? item.proveedor.nombre: 'Sin proveedor'}}</td>
+                      <td>{{item.id_prod}}</td>
+                      <td>{{item.descripcion}}</td>
+                      <td>{{item.cantidad}}</td>
+                      <td>{{item.precio}}</td>
+                      <td>{{item.created_at}}</td>
+                      <td>{{item.updated_at}}</td>
+                      <td>
+                        <button class="btn btn-info" (click)="CargarDatos(item.id_prod)"  data-toggle="modal" data-target="#modalForm">Editar</button>
+                      </td>
+                      <td>
+                        <button class="btn btn-danger" (click)="Eliminar(item.id_prod)">Eliminar</button>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FIN CUERPO -->
+
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{titulo}} Proveedor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <form [formGroup]="miFormulario" (ngSubmit)="Guardar()">
+        <div class="modal-body ">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Proveedor <span style="color:red;">*</span></label>
+            <div class="col-sm-10">
+              <select class="form-control"  formControlName="proveedor" [(ngModel)] ="idProveedor">
+                <option *ngFor="let item of proveedores"
+                [value]="item.id_proveedor"
+                [selected]="item.id_proveedor == idProveedor">{{item.nombre}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Descripción <span style="color:red;">*</span></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"formControlName="descripcion">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Cantidad <span style="color:red;">*</span></label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control"formControlName="cantidad">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Precio <span style="color:red;">*</span></label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" formControlName="precio">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Imagen</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control" (change)="ArchivoSeleccionado($event)">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!miFormulario.valid" >Guardar Cambios</button>
+        </div>
+     </form>
+    </div>
+  </div>
+</div>
+
